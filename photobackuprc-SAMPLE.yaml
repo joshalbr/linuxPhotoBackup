@@ -1,0 +1,17 @@
+# This config file if located in $HOME/.photobackup.yaml will use these configs
+# as defaults.  Any command line parameters will override these settings.
+# You can specify only the commands you want to explicitly set
+:directory:
+  - /path/to/some/dir1
+  - /path/to/some/dir2
+:rescan: false
+:threads: 5
+:verbose: false
+:s3path: s3://bucket/path
+:uniq_dir: /path/to/unique/dir
+:by_date_dir: /path/to/bydate/dir
+:filename: /path/to/file/for/metadata
+:aws:
+  :access_key_id: SOME_REAL_AWS_KEY
+  :secret_access_key: SOME_REAL_SECRET_KEY
+  :region: SOME_REAL_AWS_REGION_LIKE_us-east-1
