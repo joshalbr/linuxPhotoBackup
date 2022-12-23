@@ -6,15 +6,13 @@ It can then optionally build a hardlink/symlink directory structure to centraliz
 
 ## Prerequisites
 
-- Ruby installed
-- Gem aws-sdk
-- Gem exifr
-- Gem progressbar
-- Gem parallel
+- Ruby 3 installed
+- bundler installed
+- Run `bundle`
 
 ## Usage
 
-`./backupPhotos.rb -h`
+`bundle exec ruby backupPhotos.rb -h`
 
 Required options are only the directory to scan, which will build a metadata file.  AWS Options will infer from your local default config (if not specified in the command line).
 
