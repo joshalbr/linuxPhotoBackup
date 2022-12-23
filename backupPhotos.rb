@@ -19,6 +19,7 @@ def get_options
   options = {
     rescan: false,
     directory: [],
+    only_images: false,
     threads: 1,
     verbose: false,
     filename: '/var/tmp/picture-data-cache.json',
@@ -45,6 +46,9 @@ def get_options
     end
     opts.on('-r', '--rescan', 'Optional | Purge existing database and scan only these directories') do |e|
       options[:rescan] = true
+    end
+    opts.on('-i', '--only-images', 'Optional | Skip non-image files') do |e|
+      options[:only_images] = true
     end
     opts.on('-t', '--threads NumberOfThreads', Integer, "Optional | Threads to use (default=#{options[:threads]})") do |t|
       options[:threads] = t
