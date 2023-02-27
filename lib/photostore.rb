@@ -8,6 +8,7 @@ require 'exifr/jpeg'
 require 'date'
 require 'progressbar'
 require 'parallel'
+require 'mimemagic'
 
 # This class abstracts the data store for photo data.
 # This uses a flat file, but could easily be modified to use a DB or DDB
@@ -16,6 +17,7 @@ class PhotoStore
 
   def initialize(options = {})
     @rescan = options.fetch(:rescan, false)
+    @only_images = options.fetch(:only_images, false)
     @filename = options.fetch(:filename, CACHE_FILE)
     @logger = options.fetch(:logger, Logger.new(STDOUT))
     @threads = options.fetch(:threads, 1)
@@ -69,8 +71,8 @@ class PhotoStore
     Dir.chdir(directory) do
       files = Dir.glob("**/*").select do |file|
         # NOTE: Selection here is all non-directory files.  This will includes things
-        # like movies, photo db files, etc.  To strictly match images, you can use mimemagic as is commented out
-        !File.directory?(file) #&& MimeMagic.by_magic(File.read(file)).type.match('image')
+        # like movies, photo db files, etc. unless the only-images option is passed
+        @only_images ? !File.directory?(file) && MimeMagic.by_magic(File.read(file)).type.match('image') : !File.directory?(file)
       end
 
       progressbar = ProgressBar.create(total: files.size)
